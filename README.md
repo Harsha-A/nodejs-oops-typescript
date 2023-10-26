@@ -98,6 +98,7 @@ These questions and answers provide a foundation for discussing OOP concepts in 
 
 
 ====
+# nodejs-oops
 
 Certainly! Here are some interview questions related to classes and Object-Oriented Programming (OOP) in Node.js:
 
@@ -165,7 +166,7 @@ These questions cover the fundamentals of classes and OOP concepts in Node.js. D
 
 
 =========
-
+# abstract classes
 In TypeScript and Node.js, abstract classes are a feature that allows you to define classes as blueprints for other classes, but they cannot be instantiated themselves. Abstract classes provide a way to define common methods and properties that must be implemented by the subclasses (derived classes). They are particularly useful when you want to ensure that certain methods are present in all subclasses but do not provide a complete implementation in the abstract class.
 
 Here's how to define and use abstract classes in TypeScript and Node.js:
@@ -220,6 +221,7 @@ Abstract classes are a powerful tool for defining a common interface and behavio
 
 
 ========
+# OOPS
 Certainly! Here are some interview questions related to Object-Oriented Programming (OOP) in TypeScript:
 
 **1. What is TypeScript, and how does it relate to OOP?**
