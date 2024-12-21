@@ -958,3 +958,131 @@ myCar.drive(); // Output: Driving a car
 - **Use a class** when you need to create objects with behavior (methods) and shared state (properties).
 - **Use an interface** when you want to define a contract for objects or classes, specifying what methods or properties they must implement, but not how they should implement them.
 
+========
+#Access Modifiers in TypeScript
+
+In TypeScript, **access modifiers** are used to control the visibility and accessibility of class members (properties and methods). There are three main access modifiers: `public`, `private`, and `protected`. These modifiers allow you to define the scope in which a class member can be accessed, both inside and outside the class.
+
+### 1. **`public`** (Default)
+- **Purpose**: Members marked as `public` are accessible from anywhere, both inside and outside the class.
+- **Default Modifier**: If no modifier is specified, the member is treated as `public` by default.
+  
+```typescript
+class Person {
+  public name: string;
+  
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  public greet() {
+    console.log(`Hello, ${this.name}`);
+  }
+}
+
+const person = new Person('Alice');
+console.log(person.name); // Accessible outside the class
+person.greet(); // Accessible outside the class
+```
+
+### 2. **`private`**
+- **Purpose**: Members marked as `private` are only accessible within the class in which they are defined. They cannot be accessed from outside the class or even from derived classes.
+  
+```typescript
+class Person {
+  private name: string;
+  
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  private greet() {
+    console.log(`Hello, ${this.name}`);
+  }
+
+  public sayHello() {
+    this.greet(); // Accessible inside the class
+  }
+}
+
+const person = new Person('Alice');
+console.log(person.name); // Error: 'name' is private and cannot be accessed outside the class
+person.greet(); // Error: 'greet' is private and cannot be accessed outside the class
+person.sayHello(); // Works fine, since greet() is accessed from within the class
+```
+
+### 3. **`protected`**
+- **Purpose**: Members marked as `protected` are accessible within the class and by subclasses (derived classes), but not from outside the class hierarchy.
+  
+```typescript
+class Person {
+  protected name: string;
+  
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  protected greet() {
+    console.log(`Hello, ${this.name}`);
+  }
+}
+
+class Employee extends Person {
+  constructor(name: string) {
+    super(name);
+  }
+
+  public employeeGreet() {
+    this.greet(); // Accessible inside derived class
+    console.log(`Welcome, ${this.name}`);
+  }
+}
+
+const employee = new Employee('Bob');
+employee.employeeGreet(); // Works fine, since greet() is accessed from the derived class
+console.log(employee.name); // Error: 'name' is protected and cannot be accessed outside the class or derived classes
+```
+
+### Summary of Access Modifiers:
+| Access Modifier | Description                                | Accessible From                           |
+|-----------------|--------------------------------------------|-------------------------------------------|
+| **`public`**    | Default modifier. Accessible everywhere.   | Inside the class, outside the class, derived classes |
+| **`private`**   | Accessible only within the class itself.   | Only inside the class                    |
+| **`protected`** | Accessible inside the class and derived classes. | Inside the class, derived classes       |
+
+### Special Case: **Shorthand for Public Properties**
+In TypeScript, you can define public properties directly in the constructor with shorthand syntax:
+
+```typescript
+class Person {
+  constructor(public name: string) {}
+
+  greet() {
+    console.log(`Hello, ${this.name}`);
+  }
+}
+
+const person = new Person('Alice');
+console.log(person.name); // Accessible outside the class
+```
+This is equivalent to:
+
+```typescript
+class Person {
+  public name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  greet() {
+    console.log(`Hello, ${this.name}`);
+  }
+}
+```
+
+### Use Cases:
+- **`public`**: When you want class members to be accessible by anyone.
+- **`private`**: When you want to hide implementation details and prevent external access to certain properties or methods.
+- **`protected`**: When you want a member to be available to the class and its subclasses, but not to outside code.
+
