@@ -331,7 +331,7 @@ Both `type` and `interface` can be used to define user types, and which one you 
 When defining user types, it's important to use meaningful and descriptive names and ensure that your types accurately represent the data structures and objects in your application.
 
 ========
-#Method Overriding & Method Overloading
+
 ### **Difference Between Method Overriding and Method Overloading in JavaScript**
 
 | Feature                | **Method Overriding**                                   | **Method Overloading**                                   |
