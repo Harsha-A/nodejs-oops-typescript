@@ -1226,4 +1226,146 @@ const employee: Employee = {
 - **Use `interface`** when defining object shapes, especially for objects that will be extended or implemented.
 - **Use `type`** when dealing with complex types like unions, intersections, tuples, or when you need more flexibility.
 
-Would you like more examples or specific use cases?
+========
+
+# ENUM
+In TypeScript, an **`enum`** (short for "enumeration") is a special "object" that allows you to define a set of named constants. It helps in representing a collection of related values that can be either numeric or string-based, and it provides better code clarity, type safety, and auto-completion in development environments.
+
+### Key Characteristics of Enums:
+- **Name-based Constants**: Enums are a way to define a collection of constants with meaningful names, which can improve code readability.
+- **Type Safety**: Enums help prevent errors by enforcing that only valid values defined in the enum are used.
+- **Two Types of Enums**: Numeric enums and string enums.
+
+### Basic Syntax
+
+```typescript
+enum Direction {
+  Up = 1,
+  Down,
+  Left,
+  Right
+}
+```
+
+In this example, the `Direction` enum defines four directions: `Up`, `Down`, `Left`, and `Right`. By default, numeric enums start from 0, but you can set a custom value for the first member (like `Up = 1`), and the following members will automatically increment by 1.
+
+### Numeric Enums (Default Behavior)
+
+```typescript
+enum Direction {
+  Up = 1,
+  Down,     // 2
+  Left,     // 3
+  Right     // 4
+}
+
+console.log(Direction.Up);   // Output: 1
+console.log(Direction.Down); // Output: 2
+console.log(Direction[3]);   // Output: Left (reverse mapping)
+```
+
+#### Key Points:
+- If no value is explicitly assigned, TypeScript auto-increments the values starting from `0` (or from a custom value if specified).
+- **Reverse Mapping**: TypeScript provides reverse mapping for numeric enums, which means you can access the name of an enum member using its value.
+
+### String Enums
+
+String enums are useful when you want the enum values to be strings instead of numbers. In this case, each member of the enum must be explicitly assigned a string value.
+
+```typescript
+enum Direction {
+  Up = "UP",
+  Down = "DOWN",
+  Left = "LEFT",
+  Right = "RIGHT"
+}
+
+console.log(Direction.Up);   // Output: "UP"
+console.log(Direction.Down); // Output: "DOWN"
+```
+
+#### Key Points:
+- String enums do not have reverse mapping like numeric enums.
+- String values are more human-readable and useful for certain scenarios, like HTTP status codes or response types.
+
+### Heterogeneous Enums (Mixed String and Numeric)
+
+You can mix string and numeric values in the same enum, although this is less common.
+
+```typescript
+enum Response {
+  No = 0,
+  Yes = "YES"
+}
+
+console.log(Response.Yes);  // Output: "YES"
+console.log(Response[0]);   // Output: No (reverse mapping)
+```
+
+### Constant and Computed Members
+
+- **Constant Members**: Members of an enum that are assigned a constant value (either numeric or string).
+- **Computed Members**: Members whose values are computed at runtime. For example, expressions or calculations.
+
+```typescript
+enum FileAccess {
+  Read = 1,
+  Write = 2,
+  ReadWrite = Read | Write,  // Computed member using bitwise OR
+}
+
+console.log(FileAccess.ReadWrite); // Output: 3
+```
+
+### Enum as Types
+
+Enums also serve as a **type** in TypeScript. For example, you can specify that a variable can only have one of the values from a given enum.
+
+```typescript
+enum Direction {
+  Up = "UP",
+  Down = "DOWN",
+  Left = "LEFT",
+  Right = "RIGHT"
+}
+
+function move(direction: Direction) {
+  console.log(`Moving in the ${direction} direction.`);
+}
+
+move(Direction.Up);   // Output: Moving in the UP direction.
+move(Direction.Left); // Output: Moving in the LEFT direction.
+```
+
+### Enum with `const` (Const Enums)
+A `const` enum is a special kind of enum that does not generate any JavaScript code. It is used when you need better performance or need to avoid generating unnecessary JavaScript code.
+
+```typescript
+const enum Direction {
+  Up = 1,
+  Down,
+  Left,
+  Right
+}
+
+console.log(Direction.Up); // Output: 1 (but no code for the enum itself is generated)
+```
+
+- **Why use `const enum`?**: `const enums` are inlined during compilation, meaning no enum object is generated at runtime, leading to smaller and faster code.
+
+### When to Use Enums:
+- **Use enums** when you need a set of related constants that can have both a symbolic name and a value.
+- **Numeric enums** are useful when working with flags or bitwise operations.
+- **String enums** are often used when you need human-readable values, like status codes or API response types.
+- **`const` enums** are great for performance-sensitive code.
+
+### Summary of Enum Types:
+
+| Enum Type       | Description                                  | Example               |
+|-----------------|----------------------------------------------|-----------------------|
+| **Numeric**     | Enum with numeric values, default starts at 0 | `enum Direction { Up = 1, Down, Left, Right }` |
+| **String**      | Enum with string values, requires explicit assignment | `enum Direction { Up = "UP", Down = "DOWN" }` |
+| **Heterogeneous** | Enum with mixed string and numeric values | `enum Response { No = 0, Yes = "YES" }` |
+| **`const` Enum** | A special enum optimized for performance, no code generated | `const enum Direction { Up = 1, Down }` |
+
+
