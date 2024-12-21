@@ -332,7 +332,7 @@ When defining user types, it's important to use meaningful and descriptive names
 
 ========
 
-### **Difference Between Method Overriding and Method Overloading in JavaScript**
+# **Difference Between Method Overriding and Method Overloading in JavaScript**
 
 | Feature                | **Method Overriding**                                   | **Method Overloading**                                   |
 |------------------------|--------------------------------------------------------|--------------------------------------------------------|
@@ -400,7 +400,7 @@ console.log(calc.calculate(5, 3)); // Output: 8
 
 ========
 
-### **Static Methods in Node.js**
+# **Static Methods in Node.js**
 
 Static methods in Node.js (and JavaScript in general) are methods defined on a class that belong to the class itself rather than to instances of the class. These methods are often used to create utility functions or operations that don't depend on any instance-specific data.
 
@@ -507,7 +507,7 @@ Static methods are powerful tools in Node.js for designing clean, reusable, and 
 ========
 
 
-### **Helper Functions in TypeScript**
+# **Helper Functions in TypeScript**
 
 Helper functions are reusable utility functions that simplify complex tasks or provide commonly used logic in an application. In TypeScript, these functions can be defined with type safety, ensuring that the inputs and outputs are strongly typed, which reduces runtime errors.
 
@@ -632,6 +632,204 @@ console.log(ValidationHelper.isPhoneNumberValid("+1234567890")); // Output: true
 
 ### **Summary**
 Helper functions in TypeScript improve code reusability, type safety, and maintainability. Whether for formatting, validation, or other utility purposes, they are an essential part of building scalable and clean TypeScript applications. By combining modularity and strong typing, they ensure better code quality and fewer bugs.
+
+=========
+
+
+# **Type Definitions in TypeScript**
+
+Type definitions in TypeScript provide a way to define the shape, structure, and type constraints of data within your application. They enhance code quality by enabling static type checking, ensuring that data types align with expectations during development.
+
+---
+
+### **Key Features of Type Definitions**
+1. **Type Safety**: Ensures variables, function arguments, and return values match the expected types.
+2. **Autocompletion**: Provides better IDE support with intelligent suggestions.
+3. **Readability**: Makes code self-documenting by explicitly stating the structure of data.
+4. **Error Detection**: Identifies mismatches or invalid type usages at compile time.
+
+---
+
+### **Types of Type Definitions**
+
+#### **1. Basic Type Annotations**
+Define the type of a variable or function return value.
+
+```typescript
+let age: number = 25;
+let name: string = "Alice";
+let isAvailable: boolean = true;
+
+function add(x: number, y: number): number {
+    return x + y;
+}
+```
+
+---
+
+#### **2. Object Type Definitions**
+Define the structure of objects using type annotations.
+
+```typescript
+let user: { name: string; age: number; isAdmin: boolean } = {
+    name: "John",
+    age: 30,
+    isAdmin: true,
+};
+```
+
+---
+
+#### **3. Custom Type Aliases**
+Create reusable and named types for complex structures.
+
+```typescript
+type User = {
+    name: string;
+    age: number;
+    isAdmin: boolean;
+};
+
+const admin: User = {
+    name: "Alice",
+    age: 28,
+    isAdmin: true,
+};
+```
+
+---
+
+#### **4. Interfaces**
+Similar to type aliases but specifically for describing object structures. They are extendable and commonly used to define contracts for classes.
+
+```typescript
+interface User {
+    name: string;
+    age: number;
+    isAdmin?: boolean; // Optional property
+}
+
+const member: User = {
+    name: "Bob",
+    age: 35,
+};
+```
+
+---
+
+#### **5. Function Type Definitions**
+Define the shape of a function, including argument and return types.
+
+```typescript
+type Add = (a: number, b: number) => number;
+
+const add: Add = (x, y) => x + y;
+```
+
+---
+
+#### **6. Array Type Definitions**
+Specify the type of elements in an array.
+
+```typescript
+let numbers: number[] = [1, 2, 3];
+let strings: Array<string> = ["hello", "world"];
+```
+
+---
+
+#### **7. Union Types**
+Allow a variable to hold multiple types.
+
+```typescript
+let id: number | string = 123;
+id = "abc";
+```
+
+---
+
+#### **8. Intersection Types**
+Combine multiple types into one.
+
+```typescript
+type Person = { name: string };
+type Employee = { id: number };
+
+type Staff = Person & Employee;
+
+const worker: Staff = {
+    name: "Jane",
+    id: 101,
+};
+```
+
+---
+
+#### **9. Generics**
+Create reusable components with type flexibility.
+
+```typescript
+function identity<T>(value: T): T {
+    return value;
+}
+
+console.log(identity<number>(42)); // Output: 42
+console.log(identity<string>("Hello")); // Output: "Hello"
+```
+
+---
+
+#### **10. Enum Types**
+Define a set of named constant values.
+
+```typescript
+enum Role {
+    Admin,
+    User,
+    Guest,
+}
+
+const userRole: Role = Role.Admin;
+```
+
+---
+
+### **Practical Use Cases**
+1. **Defining API Responses**:
+   ```typescript
+   interface ApiResponse {
+       data: object;
+       status: number;
+       error?: string;
+   }
+
+   function fetchApi(): ApiResponse {
+       return { data: {}, status: 200 };
+   }
+   ```
+
+2. **Defining Class Contracts**:
+   ```typescript
+   interface Shape {
+       calculateArea(): number;
+   }
+
+   class Rectangle implements Shape {
+       constructor(private width: number, private height: number) {}
+       calculateArea(): number {
+           return this.width * this.height;
+       }
+   }
+   ```
+
+3. **Reusable Type Definitions for Libraries**:
+   TypeScript libraries often come with type definition files (`.d.ts`) to provide type information for their APIs.
+
+---
+
+### **Summary**
+Type definitions in TypeScript make code safer, more readable, and maintainable by explicitly defining the types of variables, objects, functions, and more. By leveraging advanced features like interfaces, generics, and unions, you can build scalable and type-safe applications.
+
 
 
 
