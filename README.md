@@ -395,3 +395,112 @@ console.log(calc.calculate(5, 3)); // Output: 8
 ### Key Points:
 - **Method Overriding** is achieved through inheritance and allows a subclass to modify the behavior of a parent class method.
 - **Method Overloading** in JavaScript is not natively supported but can be implemented using techniques like argument checking or default parameters to provide multiple ways to perform a task based on the inputs.
+
+
+
+========
+
+### **Static Methods in Node.js**
+
+Static methods in Node.js (and JavaScript in general) are methods defined on a class that belong to the class itself rather than to instances of the class. These methods are often used to create utility functions or operations that don't depend on any instance-specific data.
+
+### **Characteristics of Static Methods**
+1. Defined using the `static` keyword.
+2. Called directly on the class, not on an instance of the class.
+3. Cannot access instance properties or methods directly (because they are not tied to an instance).
+4. Can access other static properties or methods within the class.
+
+---
+
+### **Example of Static Methods in Node.js**
+```javascript
+class Calculator {
+    // Static method for addition
+    static add(a, b) {
+        return a + b;
+    }
+
+    // Static method for subtraction
+    static subtract(a, b) {
+        return a - b;
+    }
+
+    // Regular method (instance-specific)
+    multiply(a, b) {
+        return a * b;
+    }
+}
+
+// Calling static methods directly on the class
+console.log(Calculator.add(5, 3)); // Output: 8
+console.log(Calculator.subtract(10, 4)); // Output: 6
+
+// Cannot call static methods on an instance
+const calc = new Calculator();
+try {
+    console.log(calc.add(5, 3)); // Error: calc.add is not a function
+} catch (err) {
+    console.log(err.message);
+}
+
+// Regular instance-specific methods can be called on instances
+console.log(calc.multiply(2, 3)); // Output: 6
+```
+
+---
+
+### **When to Use Static Methods**
+1. **Utility Functions**: Functions that don't depend on the state of an instance, such as calculations or formatting.
+2. **Helper Methods**: Methods that provide reusable logic for multiple parts of your application.
+3. **Factory Methods**: Static methods that return new instances of a class.
+
+---
+
+### **Static Methods in Node.js Context**
+Static methods are commonly used in Node.js to encapsulate logic in a utility class or when designing services or libraries.
+
+#### Example: Utility Class
+```javascript
+class StringUtil {
+    static capitalize(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    static reverse(str) {
+        return str.split("").reverse().join("");
+    }
+}
+
+// Usage
+console.log(StringUtil.capitalize("hello")); // Output: "Hello"
+console.log(StringUtil.reverse("world"));    // Output: "dlrow"
+```
+
+#### Example: Database Service
+```javascript
+class DatabaseService {
+    static connect(dbUrl) {
+        console.log(`Connecting to database at ${dbUrl}...`);
+        // Logic for connecting to the database
+    }
+}
+
+// Usage
+DatabaseService.connect("mongodb://localhost:27017/mydb");
+```
+
+---
+
+### **Advantages**
+- **Encapsulation**: Groups utility functions logically within a class.
+- **Code Reuse**: Can be reused without creating instances.
+- **Clean Design**: Prevents unnecessary instance creation for methods that don't rely on instance-specific data.
+
+---
+
+### **Limitations**
+1. Cannot access instance-specific properties or methods.
+2. Overusing static methods may lead to procedural-like design instead of object-oriented.
+
+Static methods are powerful tools in Node.js for designing clean, reusable, and modular code.
+
