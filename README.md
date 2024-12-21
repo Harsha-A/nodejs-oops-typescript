@@ -959,7 +959,7 @@ myCar.drive(); // Output: Driving a car
 - **Use an interface** when you want to define a contract for objects or classes, specifying what methods or properties they must implement, but not how they should implement them.
 
 ========
-#Access Modifiers in TypeScript
+# Access Modifiers in TypeScript
 
 In TypeScript, **access modifiers** are used to control the visibility and accessibility of class members (properties and methods). There are three main access modifiers: `public`, `private`, and `protected`. These modifiers allow you to define the scope in which a class member can be accessed, both inside and outside the class.
 
