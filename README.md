@@ -832,4 +832,67 @@ Type definitions in TypeScript make code safer, more readable, and maintainable 
 
 
 
+# _ vs  # for private properties of class
+
+In TypeScript, you can use either `_` (by convention) or `#` (native to JavaScript) for private properties, but they serve different purposes:
+
+### **1. Using `_` for Private Properties (By Convention)**
+- This is a widely used convention in JavaScript and TypeScript to indicate a property is private.
+- It is **not enforced by the language**; the property is still accessible outside the class.
+
+Example:
+```typescript
+class Person {
+  private _name: string;
+
+  constructor(name: string) {
+    this._name = name;
+  }
+
+  getName(): string {
+    return this._name;
+  }
+}
+
+const person = new Person("John");
+console.log(person.getName()); // Allowed
+// console.log(person._name); // Still accessible but against convention
+```
+
+---
+
+### **2. Using `#` for Private Properties (Native Private Fields)**
+- This is a JavaScript feature that TypeScript supports.
+- Properties with `#` are truly private and cannot be accessed outside the class, even accidentally.
+
+Example:
+```typescript
+class Person {
+  #name: string;
+
+  constructor(name: string) {
+    this.#name = name;
+  }
+
+  getName(): string {
+    return this.#name;
+  }
+}
+
+const person = new Person("John");
+console.log(person.getName()); // Allowed
+// console.log(person.#name); // Error: Private field '#name' must be declared in an enclosing class
+```
+
+---
+
+### **Key Differences**
+| Feature                | `_` Convention          | `#` Private Field      |
+|------------------------|--------------------------|-------------------------|
+| Accessibility          | Can still be accessed outside (not truly private) | Completely private |
+| Enforcement            | Relies on developer discipline | Enforced by the language |
+| Supported Environments | Works in all JavaScript engines | Requires ES6+ support |
+
+**Recommendation:** Use `#` for strict privacy, but if backward compatibility is required, stick with the `_` convention.
+
 
