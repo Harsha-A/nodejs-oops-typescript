@@ -329,3 +329,69 @@ In this example, we define the `Person` type using the `interface` keyword. The 
 Both `type` and `interface` can be used to define user types, and which one you choose often depends on your specific use case and coding style. `type` can be more flexible and can represent unions, intersections, and other complex types, while `interface` is often used when defining the shape of objects and classes.
 
 When defining user types, it's important to use meaningful and descriptive names and ensure that your types accurately represent the data structures and objects in your application.
+
+========
+#Method Overriding & Method Overloading
+### **Difference Between Method Overriding and Method Overloading in JavaScript**
+
+| Feature                | **Method Overriding**                                   | **Method Overloading**                                   |
+|------------------------|--------------------------------------------------------|--------------------------------------------------------|
+| **Definition**         | A child class redefines a method inherited from the parent class. | Creating multiple methods with the same name but different parameter sets. |
+| **Purpose**            | Used to provide a specific implementation of a method in a subclass. | Used to define multiple ways to perform a task depending on the number or type of arguments. |
+| **Implementation**     | Achieved in JavaScript using **prototypal inheritance** or **ES6 classes**. | Not directly supported in JavaScript. Achieved by manually checking arguments or using default parameters. |
+| **Runtime or Compile-time** | Happens at runtime (polymorphism).                   | Happens at compile-time in other languages, but JavaScript uses runtime checks. |
+| **Use Case**           | Used in **inheritance** to modify the behavior of a parent class method. | Provides flexibility by defining multiple versions of a method for different inputs. |
+
+---
+
+### **Examples**
+
+#### **1. Method Overriding Example**
+Method overriding occurs when a subclass provides its own implementation of a method inherited from the parent class:
+
+```javascript
+class Parent {
+    greet() {
+        return "Hello from Parent!";
+    }
+}
+
+class Child extends Parent {
+    greet() {
+        return "Hello from Child!";
+    }
+}
+
+const obj = new Child();
+console.log(obj.greet()); // Output: "Hello from Child!"
+```
+
+- **Explanation**: The `greet` method in the `Child` class overrides the `greet` method in the `Parent` class. This happens at runtime, allowing the subclass to provide its own specific implementation.
+
+---
+
+#### **2. Method Overloading Example**
+JavaScript does not natively support method overloading as in some other programming languages like Java or C#. However, it can be simulated using techniques like argument checking or default parameters:
+
+```javascript
+class Calculator {
+    calculate(a, b) {
+        if (b !== undefined) {
+            return a + b; // If two arguments are passed, perform addition.
+        }
+        return a * a; // If one argument is passed, return its square.
+    }
+}
+
+const calc = new Calculator();
+console.log(calc.calculate(5)); // Output: 25
+console.log(calc.calculate(5, 3)); // Output: 8
+```
+
+- **Explanation**: The `calculate` method in this example behaves differently depending on the number of arguments passed. This simulates method overloading by using runtime checks to determine the desired behavior.
+
+---
+
+### Key Points:
+- **Method Overriding** is achieved through inheritance and allows a subclass to modify the behavior of a parent class method.
+- **Method Overloading** in JavaScript is not natively supported but can be implemented using techniques like argument checking or default parameters to provide multiple ways to perform a task based on the inputs.
