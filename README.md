@@ -896,3 +896,65 @@ console.log(person.getName()); // Allowed
 **Recommendation:** Use `#` for strict privacy, but if backward compatibility is required, stick with the `_` convention.
 
 
+# Class vs Interface
+
+In TypeScript (and many other object-oriented programming languages like Java), both classes and interfaces are used to define the structure of objects, but they serve different purposes and have distinct characteristics:
+
+### 1. **Class**
+- **Purpose**: A class is a blueprint for creating objects with defined properties and methods. It can contain both the declaration of properties and the implementation of methods.
+- **Instantiation**: You can create instances of a class using the `new` keyword.
+- **Constructors**: Classes can have constructors to initialize objects when they are created.
+- **Access Modifiers**: Classes can have access modifiers like `public`, `private`, and `protected` to define visibility for properties and methods.
+- **Inheritance**: Classes can extend other classes and implement interfaces, supporting inheritance.
+
+```typescript
+class Car {
+  private color: string;
+  
+  constructor(color: string) {
+    this.color = color;
+  }
+
+  drive() {
+    console.log('Driving a', this.color, 'car');
+  }
+}
+
+const myCar = new Car('red');
+myCar.drive(); // Output: Driving a red car
+```
+
+### 2. **Interface**
+- **Purpose**: An interface defines the structure (types) of objects, but it does not provide implementation. It is purely used for type-checking and ensures that a class or object adheres to a particular structure.
+- **Instantiation**: You cannot create an instance of an interface directly. It is used to enforce type constraints on classes or objects.
+- **No Implementation**: Interfaces only define the signatures of methods and properties, not their behavior.
+- **Inheritance**: Interfaces can extend other interfaces but cannot implement them (unlike classes).
+  
+```typescript
+interface Drivable {
+  drive(): void;
+}
+
+class Car implements Drivable {
+  drive() {
+    console.log('Driving a car');
+  }
+}
+
+const myCar = new Car();
+myCar.drive(); // Output: Driving a car
+```
+
+### Key Differences:
+| Feature            | Class                                  | Interface                               |
+|--------------------|----------------------------------------|-----------------------------------------|
+| **Purpose**         | Defines both properties and methods, and provides implementation | Defines the structure (types) of objects without implementation |
+| **Instantiation**   | Can be instantiated (using `new`)      | Cannot be instantiated                 |
+| **Implementation**  | Can provide method implementations    | Only defines method signatures, no implementations |
+| **Modifiers**       | Can use access modifiers (`public`, `private`, etc.) | Does not have access modifiers         |
+| **Inheritance**     | Can extend other classes and implement interfaces | Can extend other interfaces, but cannot implement classes |
+
+### When to use:
+- **Use a class** when you need to create objects with behavior (methods) and shared state (properties).
+- **Use an interface** when you want to define a contract for objects or classes, specifying what methods or properties they must implement, but not how they should implement them.
+
