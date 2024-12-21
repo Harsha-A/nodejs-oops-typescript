@@ -1086,3 +1086,144 @@ class Person {
 - **`private`**: When you want to hide implementation details and prevent external access to certain properties or methods.
 - **`protected`**: When you want a member to be available to the class and its subclasses, but not to outside code.
 
+========
+
+# Type vs Interface
+
+In TypeScript, both **`type`** and **`interface`** are used to define the structure of objects, but they have some key differences and use cases. While they are often interchangeable in many scenarios, there are distinctions that influence which one you should use.
+
+### Key Differences Between `type` and `interface`
+
+| Feature               | **`type`**                                       | **`interface`**                                |
+|-----------------------|--------------------------------------------------|------------------------------------------------|
+| **Declaration Syntax** | Can describe objects, unions, intersections, and more. | Primarily used to describe object shapes and can extend other interfaces. |
+| **Extending**          | Can extend via intersections (`&`).             | Can extend via `extends`. Can also extend multiple interfaces. |
+| **Merging**            | No declaration merging (cannot redefine a type with the same name). | Supports declaration merging (multiple definitions of the same interface are merged). |
+| **Primitive Types**    | Can represent primitive types, unions, and intersections. | Primarily used for defining the structure of objects, not for primitive types. |
+| **Computation**        | Can use mapped types, conditional types, and more advanced type manipulations. | Limited to defining object shapes but can extend other interfaces. |
+| **Use Case**           | More flexible, used for complex types like unions and intersections. | Better suited for defining object structures and class contracts. |
+| **Compatibility**      | Types and interfaces are mostly compatible but have different behaviors for advanced use cases. | More specialized for objects, especially when defining class-like structures. |
+
+### 1. **`type`** (Type Alias)
+- **Purpose**: `type` can represent any valid TypeScript type, including primitives, unions, intersections, and tuples. It is flexible and can be used for more complex type manipulations.
+- **Syntax**: 
+```typescript
+type Person = {
+  name: string;
+  age: number;
+};
+```
+
+- **Union Types**:
+```typescript
+type ID = string | number;
+```
+
+- **Intersection Types**:
+```typescript
+type Employee = Person & { department: string };
+```
+
+- **Tuple Types**:
+```typescript
+type Coordinates = [number, number];
+```
+
+### 2. **`interface`**
+- **Purpose**: `interface` is primarily used to define the structure of objects, and it is often used to describe contracts for classes or objects. It can extend other interfaces and be merged.
+- **Syntax**:
+```typescript
+interface Person {
+  name: string;
+  age: number;
+}
+```
+
+- **Extending Interfaces**:
+```typescript
+interface Employee extends Person {
+  department: string;
+}
+```
+
+- **Merging**:
+  If you declare an interface with the same name multiple times, they will be merged into one interface.
+
+```typescript
+interface Person {
+  name: string;
+}
+  
+interface Person {
+  age: number;
+}
+
+const person: Person = {
+  name: 'Alice',
+  age: 25
+}; // Works fine because Person is merged
+```
+
+### When to Use `type` vs `interface`:
+
+#### **Use `interface`** when:
+- You are defining the structure of an object or class, especially if it needs to be used in object-oriented programming or extended by other classes or interfaces.
+- You want to take advantage of **declaration merging** (e.g., adding new properties to an interface).
+- You want to define shapes for objects that will be implemented by classes.
+
+#### **Use `type`** when:
+- You need to define more complex types like **unions** or **intersections** (e.g., combining multiple types together).
+- You want to define **tuples**, **mapped types**, or **conditional types**.
+- You are working with types that may include primitives or other non-object types.
+
+### Example Comparison
+
+```typescript
+// Using `interface`
+interface Person {
+  name: string;
+  age: number;
+}
+
+interface Employee extends Person {
+  department: string;
+}
+
+const employee: Employee = {
+  name: "Alice",
+  age: 30,
+  department: "HR"
+};
+
+// Using `type`
+type Person = {
+  name: string;
+  age: number;
+};
+
+type Employee = Person & { department: string };
+
+const employee: Employee = {
+  name: "Alice",
+  age: 30,
+  department: "HR"
+};
+```
+
+### Special Features of Each:
+
+#### `type`:
+- Can represent **unions** and **intersections**.
+- Can represent **primitive types**, **tuples**, **mapped types**, and more advanced constructs.
+- Cannot be merged (you cannot declare a type twice with the same name).
+
+#### `interface`:
+- Supports **declaration merging**.
+- Can be extended using the `extends` keyword.
+- Better for object-oriented programming and when defining objects that will be implemented by classes.
+
+### Conclusion:
+- **Use `interface`** when defining object shapes, especially for objects that will be extended or implemented.
+- **Use `type`** when dealing with complex types like unions, intersections, tuples, or when you need more flexibility.
+
+Would you like more examples or specific use cases?
