@@ -1397,3 +1397,160 @@ console.log(Direction.Up); // Output: 1 (but no code for the enum itself is gene
 2. **JWT**:
    - Use when you need a compact, self-contained token to authenticate and exchange data securely.
    - Example: Stateless API authentication between a client and server.
+
+
+# REST API 
+
+Here are some commonly asked **REST API** and **RESTful API** interview questions with answers, covering concepts like statelessness, HTTP methods, and more:
+
+---
+
+### **1. What is a REST API?**
+**Answer:**
+A REST (Representational State Transfer) API is a set of web services that follow REST architectural principles. It uses standard HTTP methods and is stateless, providing access to resources via URIs.
+
+---
+
+### **2. What is the difference between REST and RESTful?**
+**Answer:**
+- **REST**: It is an architectural style or design pattern for creating APIs.
+- **RESTful**: It refers to APIs designed using REST principles.
+
+---
+
+### **3. What are the principles of REST architecture?**
+**Answer:**
+1. **Statelessness**: Each request from the client must contain all necessary information for the server to process it.
+2. **Client-Server**: Clear separation of concerns between client and server.
+3. **Uniform Interface**: Consistent and well-defined API endpoints and structure.
+4. **Cacheable**: Responses must define if they are cacheable or not.
+5. **Layered System**: Intermediaries like load balancers can be used to improve scalability.
+6. **Code on Demand (optional)**: Servers can provide executable code to the client when required.
+
+---
+
+### **4. What is meant by "stateless" in REST APIs?**
+**Answer:**
+In REST APIs, statelessness means the server does not maintain any session information about the client. Each request must contain all necessary data (e.g., authentication, parameters) to process the request.
+
+---
+
+### **5. What are the standard HTTP methods used in REST?**
+**Answer:**
+- **GET**: Retrieve a resource.
+- **POST**: Create a resource.
+- **PUT**: Update/replace a resource.
+- **PATCH**: Partially update a resource.
+- **DELETE**: Remove a resource.
+
+---
+
+### **6. What is the difference between PUT and PATCH?**
+**Answer:**
+- **PUT**: Replaces the entire resource with a new one.
+- **PATCH**: Updates only specific fields of an existing resource.
+
+---
+
+### **7. What are the common status codes used in REST APIs?**
+**Answer:**
+- **200 OK**: Successful request.
+- **201 Created**: Resource successfully created.
+- **204 No Content**: Successful request with no body in response.
+- **400 Bad Request**: Client-side error (e.g., invalid input).
+- **401 Unauthorized**: Authentication required.
+- **403 Forbidden**: No permission to access the resource.
+- **404 Not Found**: Resource not found.
+- **500 Internal Server Error**: Server-side error.
+
+---
+
+### **8. What is the difference between synchronous and asynchronous REST APIs?**
+**Answer:**
+- **Synchronous**: The client waits for the server's response before proceeding.
+- **Asynchronous**: The client does not wait for the response; the server processes the request and sends a callback or notification once done.
+
+---
+
+### **9. What is HATEOAS in REST APIs?**
+**Answer:**
+HATEOAS (Hypermedia As The Engine Of Application State) is a constraint of REST where a client interacts with the application entirely through hypermedia links provided dynamically by the server. Example: Returning URLs for the next actions in the API response.
+
+---
+
+### **10. How do you handle authentication in REST APIs?**
+**Answer:**
+Common methods include:
+- **Basic Authentication**: Username and password encoded in the header.
+- **Token-Based Authentication**: Using JWT, OAuth, or API keys.
+- **Session-Based Authentication**: Rare in REST due to statelessness.
+
+---
+
+### **11. What are idempotent methods in REST?**
+**Answer:**
+Idempotent methods produce the same result no matter how many times they are called:
+- **GET**, **PUT**, **DELETE** are idempotent.
+- **POST** is not idempotent because it creates new resources with each call.
+
+---
+
+### **12. What is CORS, and why is it important in REST APIs?**
+**Answer:**
+CORS (Cross-Origin Resource Sharing) is a mechanism that allows restricted resources (e.g., APIs) on a web page to be accessed from a different origin. It's controlled using HTTP headers like `Access-Control-Allow-Origin`.
+
+---
+
+### **13. How do you version a REST API?**
+**Answer:**
+API versioning ensures backward compatibility:
+1. **URI Versioning**: `/api/v1/resource`
+2. **Header Versioning**: `Accept: application/vnd.api+v1`
+3. **Query Parameter**: `/resource?version=1`
+
+---
+
+### **14. How do you ensure REST API scalability?**
+**Answer:**
+1. Use **caching** for frequently accessed data.
+2. Implement **load balancing**.
+3. Use a **rate limiter** to prevent abuse.
+4. Optimize **database queries**.
+5. Use **asynchronous processing** for time-consuming tasks.
+
+---
+
+### **15. How do you test REST APIs?**
+**Answer:**
+REST APIs can be tested using tools like:
+1. **Postman** or **Insomnia** for manual testing.
+2. **Mocha**/ **Jest** in Node.js for automated testing.
+3. **Swagger/OpenAPI** for documentation and testing.
+
+---
+
+### **16. What is the role of middleware in REST APIs?**
+**Answer:**
+Middleware functions in Node.js handle requests before they reach the final route handler. Common uses include:
+- Logging requests.
+- Validating input.
+- Authentication and authorization.
+
+---
+
+### **17. How do REST APIs differ from GraphQL APIs?**
+| **Feature**      | **REST API**                          | **GraphQL API**                   |
+|-------------------|---------------------------------------|------------------------------------|
+| Data Fetching     | Multiple endpoints.                  | Single endpoint with flexible queries. |
+| Over-fetching     | Likely to over-fetch unnecessary data. | Fetch only required fields.       |
+| Under-fetching    | May require multiple requests.        | Retrieves all data in one query.  |
+
+---
+
+### **18. What tools can be used to monitor and secure REST APIs?**
+**Answer:**
+- **Monitoring**: AWS CloudWatch, New Relic, Datadog.
+- **Security**: OWASP guidelines, API Gateway, Auth0, AWS WAF (Web Application Firewall).
+
+---
+
