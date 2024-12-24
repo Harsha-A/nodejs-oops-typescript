@@ -1368,4 +1368,32 @@ console.log(Direction.Up); // Output: 1 (but no code for the enum itself is gene
 | **Heterogeneous** | Enum with mixed string and numeric values | `enum Response { No = 0, Yes = "YES" }` |
 | **`const` Enum** | A special enum optimized for performance, no code generated | `const enum Direction { Up = 1, Down }` |
 
+========
+# OAuth & JWT
 
+### **Difference Between OAuth and JWT**
+
+| **Feature**               | **OAuth**                                       | **JWT (JSON Web Token)**                          |
+|---------------------------|------------------------------------------------|--------------------------------------------------|
+| **Definition**            | OAuth is an open standard for authorization. It allows a third-party application to access a user's resources on their behalf without sharing credentials. | JWT is a compact, self-contained token format used to securely transmit information between parties as a JSON object. |
+| **Purpose**               | Primarily used for **authorization**.          | Used for both **authentication** and **information exchange**. |
+| **How It Works**          | OAuth uses access tokens (which may or may not be JWTs) to grant permissions for resource access. It involves an authorization server and resource server. | JWT is a token that contains claims (information) and is signed, making it tamper-proof. It's often used to represent a user's identity or permissions. |
+| **Structure**             | Not defined by itself; uses tokens (like JWT, opaque tokens, etc.) for access. | A standardized format with three parts: Header, Payload, and Signature (e.g., `header.payload.signature`). |
+| **Token Storage**         | Tokens are usually stored on the client side (e.g., in cookies or local storage). Refresh tokens can be used to request new tokens. | JWTs are stateless and self-contained, so no session state is required on the server. Typically stored in local or session storage. |
+| **Statefulness**          | OAuth is often stateful because the server tracks token validity and sessions. | JWTs are stateless; the server doesn’t need to store session data as the token itself contains all required information. |
+| **Token Expiry**          | Access tokens expire quickly, and refresh tokens are used to get new ones. | JWTs have an embedded expiration time (`exp` claim) but cannot be revoked unless tracked separately. |
+| **Security**              | More secure because tokens can be scoped and revoked independently. Refresh tokens add additional layers of control. | Less secure if mismanaged, as JWTs are self-contained and cannot be revoked without extra measures (e.g., a token blacklist). |
+| **Use Cases**             | - Authorization in web and mobile apps.        | - Authentication (e.g., user identity validation). |
+| **Examples**              | - Login with Google/Facebook.                  | - APIs returning JWTs after user login.          |
+
+---
+
+### **When to Use Which?**
+
+1. **OAuth**:
+   - Use when you need a third-party application to access user data/resources on behalf of the user.
+   - Example: Logging into a website using Google or GitHub credentials.
+
+2. **JWT**:
+   - Use when you need a compact, self-contained token to authenticate and exchange data securely.
+   - Example: Stateless API authentication between a client and server.
